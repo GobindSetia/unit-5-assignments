@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping List</title>
+    <style>
+      #container {
+        width: 40%;
+        background-color: rgb(165, 165, 165);
+        height: 600px;
+        text-align: center;
+        border: 20px solid black;
+        border-radius: 20px;
+        margin: auto;
+      }
+
+      th,
+      td {
+        border: 1px solid black;
+        padding: 5px 15px;
+      }
+      table {
+        width: 100%;
+        margin: 0px auto;
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Shopping List</h1>
+      <form id="form">
+        <label>Item</label>
+        <input type="text" placeholder="Enter an Item" id="item" />
+        <label>Quantity</label>
+        <input
+          type="number"
+          placeholder="Enter required quantity"
+          id="quantity"
+        /><br />
+        <label>Priority</label>
+        <select name="" id="priority">
+          <option value="">----</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+        <input type="submit" value="submit" />
+      </form>
+      <hr />
+      <table>
+        <thead>
+          <tr>
+            <th>Item Name</th>
+            <th>Quantity</th>
+            <th>Priority</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
+<script>
+  document.querySelector("#form").addEventListener("submit", addItem);
+  
+  //
+  var arr = JSON.parse(localStorage.getItem('ToDoList'))||[];
+  displayArray(arr);
+  function addItem(event) {
+    event.preventDefault();
+    var item = document.querySelector("#item").value;
+    var qty = document.querySelector("#quantity").value;
+    var pty = document.querySelector("#priority").value;
+
+    var obj = {
+      name: item,
+      quantity: qty,
+      priority: pty,
+    };
+    arr.push(obj);
+    console.log(arr);
+    localStorage.setItem("ToDoList", JSON.stringify(arr));
+
+      displayArray(arr); 
+  }
+function displayArray(arr){
+  document.querySelector('tbody').innerHTML = "";
+  arr.map(function (el,index) {
+    
+      var tRow = document.createElement("tr");
+
+      var t1 = document.createElement("td");
+      t1.textContent = el.name;
+      var t2 = document.createElement("td");
+      t2.textContent = el.quantity;
+      var t3 = document.createElement("td");
+      t3.textContent = el.priority;
+      
+      if (el.priority == "High") {
+        t3.style.backgroundColor = "red";
+        t3.style.color = "white";
+      } else if (el.priority == "Low") {
+        t3.style.backgroundColor = "green";
+        t3.style.color = "white";
+      } else if (el.priority == "Medium") {
+        t3.style.backgroundColor = "yellow";
+        t3.style.color = "black";
+      }
+
+      var t4 = document.createElement("td");
+      t4.textContent = "Delete";
+      t4.addEventListener("click", function(){
+        deleteItem(index);
+      });
+      document.querySelector("tbody").append(tRow);
+      tRow.append(t1, t2, t3, t4)
+    });
+}
+
+  function deleteItem(index){
+        console.log(index);
+        arr.splice(index,1);
+        localStorage.setItem("ToDoList", JSON.stringify(arr));
+        displayArray(arr);
+    }
+</script>
