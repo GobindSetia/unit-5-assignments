@@ -1,3 +1,6 @@
+
+import './index.css';
+
 function indexHTML(){
     return `
     <h1>Shopping List</h1>

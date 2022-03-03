@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <div id="container">
-
-    </div>
-
+  </head>
+  <body>
+    <div id="container"></div>
 
     <script type="module">
-        import indexHTML from './src/indexHTML.js';
-        document.getElementById("container").innerHTML = indexHTML();
+      import {indexHTML,addItem,displayArray,deleteItem} from "./src/index.js";
+
+      document.getElementById("container").innerHTML = indexHTML();
+
+      document.querySelector("#form").addEventListener("submit", addItem);
+
+      var arr = JSON.parse(localStorage.getItem("ToDoList")) || [];
+      displayArray(arr);
     </script>
-</body>
+  </body>
 </html>
