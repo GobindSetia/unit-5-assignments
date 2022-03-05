@@ -1,67 +1,88 @@
+import "./index.css";
+import logo1 from "./images/logo.png";
 
-import indexHTML from "./indexHTML.js";
+console.log(logo1);
+//Heading
+const logo =  document.createElement("img");
+logo.src = logo1;
 
 
-  function addItem(event) {
+//FORM
+const form = document.createElement("form");
+form.id = "form";
+const noteHeadingLabel =  document.createElement("label");
+noteHeadingLabel.innerText = "Heading";
+const noteHeadingInput = document.createElement("input");
+noteHeadingInput.type = "text";
+noteHeadingInput.id = "noteHeading";
+
+const noteTextLabel =  document.createElement("label");
+noteTextLabel.innerText = "Note";
+const noteInput = document.createElement("input");
+noteInput.type = "text";
+noteInput.id = "note";
+
+
+const submitNote = document.createElement("input");
+submitNote.type = "submit";
+submitNote.value = "submit";
+
+const line = document.createElement("hr");
+const displayDiv = document.createElement("div");
+displayDiv.id = "displayDiv";
+form.append(noteHeadingLabel,noteHeadingInput,noteTextLabel,noteInput,submitNote);
+ document.getElementById("container").append(logo,form,line,displayDiv);
+
+
+//Display Div
+document.querySelector("#form").addEventListener("submit", addNote);
+
+
+
+var arr = JSON.parse(localStorage.getItem('noteList'))||[];
+  displayArray(arr);
+
+
+  function addNote(event) {
     event.preventDefault();
-    var item = document.querySelector("#item").value;
-    var qty = document.querySelector("#quantity").value;
-    var pty = document.querySelector("#priority").value;
+    var noteHeading = document.querySelector("#noteHeading").value;
+    var note = document.querySelector("#note").value;
 
     var obj = {
-      name: item,
-      quantity: qty,
-      priority: pty,
+      heading: noteHeading,
+      content: note,
     };
     arr.push(obj);
-    console.log(arr);
-    localStorage.setItem("ToDoList", JSON.stringify(arr));
+    localStorage.setItem("noteList", JSON.stringify(arr));
 
-      displayArray(arr); 
+    displayArray(arr); 
   }
 
 function displayArray(arr){
-  document.querySelector('tbody').innerHTML = "";
+  document.querySelector('#displayDiv').innerHTML = "";
   arr.map(function (el,index) {
-    
-      var tRow = document.createElement("tr");
-
-      var t1 = document.createElement("td");
-      t1.textContent = el.name;
-      var t2 = document.createElement("td");
-      t2.textContent = el.quantity;
-      var t3 = document.createElement("td");
-      t3.textContent = el.priority;
-      
-      if (el.priority == "High") {
-        t3.style.backgroundColor = "red";
-        t3.style.color = "white";
-      } else if (el.priority == "Low") {
-        t3.style.backgroundColor = "green";
-        t3.style.color = "white";
-      } else if (el.priority == "Medium") {
-        t3.style.backgroundColor = "yellow";
-        t3.style.color = "black";
-      }
-
-      var t4 = document.createElement("td");
-      t4.textContent = "Delete";
-      t4.addEventListener("click", function(){
+    const noteDiv = document.createElement("div");
+    const heading = document.createElement("h4");
+    heading.textContent = el.heading;
+    const note = document.createElement("p");
+    note.textContent = el.content;
+      const del = document.createElement("button");
+      del.innerHTML = "Delete";
+      del.addEventListener("click", function(){
         deleteItem(index);
       });
-      document.querySelector("tbody").append(tRow);
-      tRow.append(t1, t2, t3, t4)
+      noteDiv.append(heading,note,del);
+      document.querySelector("#displayDiv").append(noteDiv);
     });
 }
 
   function deleteItem(index){
         console.log(index);
         arr.splice(index,1);
-        localStorage.setItem("ToDoList", JSON.stringify(arr));
+        localStorage.setItem("noteList", JSON.stringify(arr));
         displayArray(arr);
     }
 
 
 
 
-    export {indexHTML,addItem,displayArray,deleteItem};

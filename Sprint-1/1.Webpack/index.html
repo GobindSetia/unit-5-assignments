@@ -9,15 +9,6 @@
   <body>
     <div id="container"></div>
 
-    <script type="module">
-      import {indexHTML,addItem,displayArray,deleteItem} from "./src/index.js";
-
-      document.getElementById("container").innerHTML = indexHTML();
-
-      document.querySelector("#form").addEventListener("submit", addItem);
-
-      var arr = JSON.parse(localStorage.getItem("ToDoList")) || [];
-      displayArray(arr);
-    </script>
+    <script type="module" src="./build/bundle.js"></script>
   </body>
 </html>

@@ -18,3 +18,26 @@
     margin: 0px auto;
     border-collapse: collapse;
   }
+  input,label{
+    width: 80%;
+  }
+#displayDiv{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+}
+#displayDiv>div{
+  border: 1px solid black;
+  padding: 0 0;
+}
+h4,p{
+  margin:0px;
+}
+h1{
+  margin: 0px;
+}
+
+img{
+  width:40%;
+  margin:0px
+}
+
