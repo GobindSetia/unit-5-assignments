@@ -1,0 +1,54 @@
+{
+  "groceries": [
+    {
+      "title": "Potato",
+      "purchased": false,
+      "id": 1
+    },
+    {
+      "title": "Onion",
+      "purchased": false,
+      "id": 2
+    },
+    {
+      "title": "Carrot",
+      "purchased": false,
+      "id": 3
+    },
+    {
+      "title": "Raddish",
+      "purchased": false,
+      "id": 4
+    },
+    {
+      "title": "Coriander",
+      "purchased": false,
+      "id": 5
+    },
+    {
+      "title": "Chilli",
+      "purchased": false,
+      "id": 6
+    },
+    {
+      "title": "Mushroom",
+      "purchased": false,
+      "id": 7
+    },
+    {
+      "title": "Green Peas",
+      "purchased": false,
+      "id": 8
+    },
+    {
+      "title": "Ginger",
+      "purchased": false,
+      "id": 9
+    },
+    {
+      "title": "Garlic",
+      "purchased": false,
+      "id": 10
+    }
+  ]
+}
